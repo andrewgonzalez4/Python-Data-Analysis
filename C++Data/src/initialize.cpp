@@ -1,42 +1,53 @@
-#include "main.h"
+ #include "main.h"
+ //#include "vector.h"
+ using namespace okapi;
 
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
+ void definitions(bool isUsing){
+   #define MAX_SPEED 100
+   #define LEFT_WHEEL_DOWN 2
+   #define RIGHT_WHEEL_DOWN 1
+   #define LEFT_WHEEL_UP 5
+   #define RIGHT_WHEEL_UP 4
+   std::string Buffer;
+
+
+
+   pros::Motor left_wheels_down (LEFT_WHEEL_DOWN);
+   pros::Motor right_wheels_down (RIGHT_WHEEL_DOWN, true);//true means it goes reversed.
+   pros::Motor left_wheels_up (LEFT_WHEEL_UP);
+   pros::Motor right_wheels_up (RIGHT_WHEEL_UP, true);//true means it goes reversed.
+
+   right_wheels_down.move_relative(1000,MAX_SPEED);
+   left_wheels_down.move_relative(1000,MAX_SPEED);
+   right_wheels_up.move_relative(1000,MAX_SPEED);
+   left_wheels_up.move_relative(1000,MAX_SPEED);
+
+  Timer timer;
+  timer.placeMark();
+
+
+  while(timer.getDtFromMark() < 10000_ms){
+
+    pros::delay(20);
+
+  }
+  //Speed
+  std::cout << "Motor Speeds are:";
+  std::cout << left_wheels_down.get_actual_velocity();
+  std::cout << right_wheels_down.get_actual_velocity();
+  std::cout << left_wheels_up.get_actual_velocity();
+  std::cout << right_wheels_up.get_actual_velocity();
+ }
+
+ void getSpeed(){
+
+ }
+
+void initialize()
+{
+definitions(true);
 }
 
-/**
- * Runs initialization code. This occurs as soon as the program is started.
- *
- * All other competition modes are blocked by initialize; it is recommended
- * to keep execution time for this mode under a few seconds.
- */
-void initialize() {
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
-
-	pros::lcd::register_btn1_cb(on_center_button);
-}
-
-/**
- * Runs while the robot is in the disabled state of Field Management System or
- * the VEX Competition Switch, following either autonomous or opcontrol. When
- * the robot is enabled, this task will exit.
- */
 void disabled() {}
 
-/**
- * Runs after initialize(), and before autonomous when connected to the Field
- * Management System or the VEX Competition Switch. This is intended for
- * competition-specific initialization routines, such as an autonomous selector
- * on the LCD.
- *
- * This task will exit when the robot is enabled and autonomous or opcontrol
- * starts.
- */
 void competition_initialize() {}

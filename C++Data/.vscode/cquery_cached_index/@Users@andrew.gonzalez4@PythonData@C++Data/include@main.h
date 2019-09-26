@@ -35,7 +35,11 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
+#include "tr1/stdlib.h"
+#include "okapi/api.hpp"
+#include "pros/apix.h"
 
+// using namespace okapi;
 /**
  * You should add more #includes here
  */
@@ -52,7 +56,6 @@
  */
 // using namespace pros;
 // using namespace pros::literals;
-// using namespace okapi;
 
 /**
  * Prototypes for the competition control tasks are redefined here to ensure
@@ -67,6 +70,11 @@ void initialize(void);
 void disabled(void);
 void competition_initialize(void);
 void opcontrol(void);
+
+class Functions{
+  public:
+
+};
 #ifdef __cplusplus
 }
 #endif
