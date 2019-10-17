@@ -2,15 +2,18 @@
  #include <vector>
  #include <sstream>
  #include <string>
+ #include "json.hpp"
  using namespace okapi;
 
-   int* definitions(int motors){
+   std::vector<std::vector<int>> definitions(int num){
+   std::vector<std::vector<int>> index;
+   std::vector<std::vector<int>> motors;
+
    #define MAX_SPEED 100
    #define LEFT_WHEEL_DOWN 2
    #define RIGHT_WHEEL_DOWN 1
    #define LEFT_WHEEL_UP 5
    #define RIGHT_WHEEL_UP 4
-   std::vector< std::vector<int> > velocities;
    /////////////////////////////
    pros::Motor left_wheels_down (LEFT_WHEEL_DOWN);
    pros::Motor right_wheels_down (RIGHT_WHEEL_DOWN, true);//true means it goes reversed.
@@ -22,31 +25,35 @@
    right_wheels_up.move_relative(1000,MAX_SPEED);
    left_wheels_up.move_relative(1000,MAX_SPEED);
 
-   std::vector<int> LDVelocity;
-   std::vector<int> LUVelocity;
-   std::vector<int> RDVelocity;
-   std::vector<int> RUVelocity;
+   std::vector<int> rwd;
+   std::vector<int> rwu;
+   std::vector<int> lwd;
+   std::vector<int> lwu;
 
-   LDVelocity.push_back(left_wheels_down.get_actual_velocity());
-   LUVelocity.push_back(left_wheels_up.get_actual_velocity());
-   RDVelocity.push_back(right_wheels_down.get_actual_velocity());
-   RUVelocity.push_back(right_wheels_up.get_actual_velocity());
+   rwd.push_back(right_wheels_down.get_actual_velocity());
+   rwu.push_back(right_wheels_up.get_actual_velocity());
+   lwd.push_back(left_wheels_down.get_actual_velocity());
+   lwu.push_back(left_wheels_up.get_actual_velocity());
 
-   velocities.push_back(LDVelocity);
-   velocities.push_back(LUVelocity);
-   velocities.push_back(RDVelocity);
-   velocities.push_back(RUVelocity);
+   motors.push_back(rwd);
+   motors.push_back(rwu);
+   motors.push_back(lwd);
+   motors.push_back(lwu);
 
-   return velocities;
+   index.push_back(rwd);
+   index.push_back(rwu);
+   index.push_back(lwd);
+   index.push_back(lwu);
+   return index;
  }
 
 void copytoJSON(){
-  std::vector<int*> buffer;
+  std::vector<std::vector<std::vector<int>>> buff;
   Timer timer;
   timer.placeMark();
 
   while(timer.getDtFromMark() < 10000_ms){
-    buffer.push_back(definitions(4));
+    buff.push_back(definitions(4));
     pros::delay(20);
   }
 }
