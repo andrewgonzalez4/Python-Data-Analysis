@@ -165,7 +165,7 @@ lcdjson = [{"PID": True,
 
             "Sensors": True}]
 
-MotorList = []
+#MotorList = []
 TimeLine = []
 initTime = 0
 maxVelsize = 0
@@ -182,11 +182,12 @@ for files in lcdjson:
             maxVelsize = len(sizes)
 """
 for files in lcdjson:
+    PIDConstants = (files['PID'])
     MotorList = (files['Motors'])
+    Sensors = (files['Sensors'])
 for values in MotorList[0][0]:
     TimeLine.append(initTime)
     initTime += 0.02
-print(TimeLine)
 # plotting the points way 1
 fig = plt.figure()
 ax = fig.add_subplot(111, facecolor='#ffe8cc')
@@ -194,10 +195,10 @@ fig.set_size_inches(18.5, 10.5, forward=True)
 # ax.set_ylim([8, 70])
 colors = ['yellow', 'red', 'green', 'blue', 'white', 'black', 'orange', 'cyan']
 for mtr in range(0, len(MotorList)):
-    plt.plot(TimeLine, MotorList[mtr][0], label="Motor " + str(mtr),  # Manera 2 [Motor -1][Speed]
+    plt.plot(TimeLine, MotorList[mtr][0], label='Motor ' + str(mtr + 1),  # Manera 2 [Motor][Speed]
              color=colors[mtr], linewidth=3, marker='o',
              markerfacecolor=colors[mtr], markersize=10)
-cursor = Cursor(ax, horizOn=True, vertOn=True, color="green", linewidth=2.0)
+cursor = Cursor(ax, horizOn=True, vertOn=True, color='green', linewidth=2.0)
 
 # naming the x axis
 plt.xlabel('Time - axis')
