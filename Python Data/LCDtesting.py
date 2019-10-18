@@ -83,43 +83,43 @@ class DataCursor(object):
 
 # with open('LCDtest.json', 'r') as f:
 #     lcdjson = json.load(f)
+# lcdjson = [{"PID": True,
+#             "Motors":{
+#                 "Motor 1": {
+#                     "Speed":[10, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 },
+#                 "Motor 2": {
+#                     "Speed":[11, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 },
+#                 "Motor 3": {
+#                     "Speed":[12, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 },
+#                 "Motor 4": {
+#                     "Speed":[13, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 },
+#                 "Motor 5": {
+#                     "Speed":[14, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 },
+#                 "Motor 6": {
+#                     "Speed":[15, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 },
+#                 "Motor 8": {
+#                     "Speed":[16, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 },
+#                 "Motor 9": {
+#                     "Speed":[17, 15, 20, 25, 30, 35, 40],
+#                     "Position":[2, 3, 7, 3, -1, 10, 5]
+#                 }
+#             },
+#             "Sensors": True}]
 lcdjson = [{"PID": True,
-            "Motors":{
-                "Motor 1": {
-                    "Speed":[10, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                },
-                "Motor 2": {
-                    "Speed":[11, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                },
-                "Motor 3": {
-                    "Speed":[12, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                },
-                "Motor 4": {
-                    "Speed":[13, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                },
-                "Motor 5": {
-                    "Speed":[14, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                },
-                "Motor 6": {
-                    "Speed":[15, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                },
-                "Motor 8": {
-                    "Speed":[16, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                },
-                "Motor 9": {
-                    "Speed":[17, 15, 20, 25, 30, 35, 40],
-                    "Position":[2, 3, 7, 3, -1, 10, 5]
-                }
-            },
-            "Sensors": True}]
-lcdjson2 = [{"PID": True,
             "Motors":
             [
                     [#Motor 1
@@ -127,35 +127,38 @@ lcdjson2 = [{"PID": True,
                         [2, 3, 7, 3, -1, 10, 5]#Pos
                     ],
 
-                    [
+                    [#Motor 2
                         [11, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-                    [
-                        [10, 15, 20, 25, 30, 35, 40],
                         [2, 3, 7, 3, -1, 10, 5]
                     ],
 
                     [
-                        [11, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-                    [
-                        [10, 15, 20, 25, 30, 35, 40],
+                        [12, 15, 20, 25, 30, 35, 40],
                         [2, 3, 7, 3, -1, 10, 5]
                     ],
 
                     [
-                        [11, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-                    [
-                        [10, 15, 20, 25, 30, 35, 40],
+                        [13, 15, 20, 25, 30, 35, 40],
                         [2, 3, 7, 3, -1, 10, 5]
                     ],
 
                     [
-                        [11, 15, 20, 25, 30, 35, 40],
+                        [14, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [
+                        [15, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [
+                        [16, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [
+                        [17, 15, 20, 25, 30, 35, 40],
                         [2, 3, 7, 3, -1, 10, 5]
                     ]
             ],
@@ -163,13 +166,12 @@ lcdjson2 = [{"PID": True,
             "Sensors": True}]
 
 MotorList = []
-MotorList2 = []
-SpeedList = []
-SpeedList2 = []
-PosList = []
 TimeLine = []
 initTime = 0
 maxVelsize = 0
+"""
+*****//If the team needed that the json files were written with dictionaries only//******
+*****//these would be the loops.//*****
 for files in lcdjson:
     MotorList.append(files['Motors'])
     for motors in MotorList[0]:
@@ -178,32 +180,23 @@ for files in lcdjson:
     for sizes in SpeedList:
         if len(sizes) > maxVelsize:
             maxVelsize = len(sizes)
-    for values in SpeedList[0]:
-        TimeLine.append(initTime)
-        initTime += 0.02
-
-for files in lcdjson2:
-    MotorList2 = (files['Motors'])
+"""
+for files in lcdjson:
+    MotorList = (files['Motors'])
+for values in MotorList[0][0]:
+    TimeLine.append(initTime)
+    initTime += 0.02
+print(TimeLine)
 # plotting the points way 1
 fig = plt.figure()
 ax = fig.add_subplot(111, facecolor='#ffe8cc')
 fig.set_size_inches(18.5, 10.5, forward=True)
-ax.set_ylim([8, 70])
-
-
-plt.plot(TimeLine, MotorList2[0][0], label="Motor 1", #Manera 2 [Motor -1][Speed]
-             color='green', linewidth=3, marker='o',
-             markerfacecolor='blue', markersize=10)
-
-plt.plot(TimeLine, SpeedList[1], label = "Motor 2",#Manera 1 [Motor -1]
-         color='red', linewidth = 3, marker='o',
-        markerfacecolor='yellow', markersize=10)
-
-plt.plot(TimeLine, SpeedList[2], label = "Motor 3",
-         color='black', linewidth = 3, marker='o',
-        markerfacecolor='orange', markersize=10)
-
-
+# ax.set_ylim([8, 70])
+colors = ['yellow', 'red', 'green', 'blue', 'white', 'black', 'orange', 'cyan']
+for mtr in range(0, len(MotorList)):
+    plt.plot(TimeLine, MotorList[mtr][0], label="Motor " + str(mtr),  # Manera 2 [Motor -1][Speed]
+             color=colors[mtr], linewidth=3, marker='o',
+             markerfacecolor=colors[mtr], markersize=10)
 cursor = Cursor(ax, horizOn=True, vertOn=True, color="green", linewidth=2.0)
 
 # naming the x axis
@@ -216,12 +209,9 @@ plt.title('Time v Speed')
 
 plt.legend()
 
-x_1, y_1 = DataCursor(ax, TimeLine, SpeedList[0]).offsets
-DataCursor(ax, TimeLine, SpeedList[0])
-x_2, y_2 = DataCursor(ax, TimeLine, SpeedList[1]).offsets
-DataCursor(ax, TimeLine, SpeedList[1])
-x_3, y_3 = DataCursor(ax, TimeLine, SpeedList[2]).offsets
-DataCursor(ax, TimeLine, SpeedList[2])
+for mtr in range(0, len(MotorList)):
+    x, y = DataCursor(ax, TimeLine, MotorList[mtr][0]).offsets
+    DataCursor(ax, TimeLine, MotorList[mtr][0])
 
 plt.rc('grid', linestyle="-", color='black')
 plt.grid(True)
