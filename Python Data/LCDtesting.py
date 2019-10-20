@@ -81,8 +81,8 @@ class DataCursor(object):
             event.canvas.draw()
 
 
-# with open('LCDtest.json', 'r') as f:
-#     lcdjson = json.load(f)
+with open('LCDtest.json', 'r') as f:
+    lcdjson = json.load(f)
 # lcdjson = [{"PID": True,
 #             "Motors":{
 #                 "Motor 1": {
