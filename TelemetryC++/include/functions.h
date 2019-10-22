@@ -1,7 +1,11 @@
 #include "main.h"
+#include "json.hpp"
+#include <fstream>
+#include <string>
+#include <iostream>
 #include <vector>
 using namespace okapi;
-#include "json.hpp"
+using nlohmann::json;
 #define MAX_SPEED 100
 #define LEFT_WHEEL_DOWN 2
 #define RIGHT_WHEEL_DOWN 1
@@ -23,12 +27,14 @@ pros::Motor right_wheels_up (RIGHT_WHEEL_UP, true);//true means it goes reversed
  }
 
  void convert(){
+   std::string filename;
    std::vector<std::vector<std::vector<int>>> motors;
    std::vector<std::vector<int>> organize;
    std::vector<int> speeds;
 
   Timer timer;
   timer.placeMark();
+  json j;
 
   while(timer.getDtFromMark() < 10000_ms){
     moveMotors();
@@ -40,5 +46,18 @@ pros::Motor right_wheels_up (RIGHT_WHEEL_UP, true);//true means it goes reversed
 
   organize.push_back(speeds);
   motors.push_back(organize);
+
+  j["Motors"] = motors;
+
+
+  filename = "j.json";
+
+  std::ofstream out("j.json");
+  out << j.dump();
+  out.close();
+
+
+
+
 
 }
