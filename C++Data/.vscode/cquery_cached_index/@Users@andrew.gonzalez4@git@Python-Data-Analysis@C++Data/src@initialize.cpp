@@ -60,6 +60,7 @@ void copytoJSON(){
 
 void initialize()
 {
+  copytoJSON();
 }
 
 void disabled() {}
