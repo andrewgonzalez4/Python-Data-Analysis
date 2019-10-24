@@ -81,7 +81,7 @@ class DataCursor(object):
             event.canvas.draw()
 
 
-with open('LCDtest.json', 'r') as f:
+with open('j.json', 'r') as f:
     lcdjson = json.load(f)
 # lcdjson = [{"PID": True,
 #             "Motors":
@@ -145,10 +145,13 @@ for files in lcdjson:
         if len(sizes) > maxVelsize:
             maxVelsize = len(sizes)
 """
-for files in lcdjson:
-    PIDConstants = (files['PID'])
-    MotorList = (files['Motors'])
-    Sensors = (files['Sensors'])
+#breakpoint()
+# for files in lcdjson:
+#     #PIDConstants = (files['PID'])
+#     MotorList = (files['Motors'])
+#     #Sensors = (files['Sensors'])
+
+MotorList = lcdjson['Motors']
 for values in MotorList[0][0]:
     TimeLine.append(initTime)
     initTime += 0.02
