@@ -83,7 +83,7 @@ class DataCursor(object):
 
 with open('j.json', 'r') as f:
     lcdjson = json.load(f)
-# lcdjson = [{"PID": True,
+# lcdjson = {"PID": True,
 #             "Motors":
 #             [
 #                     [#Motor 1
@@ -127,7 +127,7 @@ with open('j.json', 'r') as f:
 #                     ]
 #             ],
 #
-#             "Sensors": True}]
+#             "Sensors": True}
 
 #MotorList = []
 TimeLine = []
