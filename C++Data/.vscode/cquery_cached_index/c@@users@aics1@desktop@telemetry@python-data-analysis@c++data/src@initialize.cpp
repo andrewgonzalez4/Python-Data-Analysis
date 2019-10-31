@@ -3,7 +3,6 @@
  #include <sstream>
  #include <string>
  #include "json.hpp"
- using namespace okapi;
 
    std::vector<std::vector<int>> definitions(int num){
    std::vector<std::vector<int>> index;

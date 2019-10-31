@@ -3,7 +3,6 @@
 #include <sstream>
 #include <string>
 #include "json.hpp"
-using namespace okapi;
 #define MAX_SPEED 100
 #define LEFT_WHEEL_DOWN 2
 #define RIGHT_WHEEL_DOWN 1
