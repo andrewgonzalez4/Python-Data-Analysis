@@ -83,55 +83,80 @@ class DataCursor(object):
 
 with open('j.json', 'r') as f:
     lcdjson = json.load(f)
-lcdjson = {"PID": True,
-            "Motors":
-            [
-                    [#Motor 1
-                        [10, 15, 20, 25, 30, 35, 40],#Speed
-                        [2, 3, 7, 3, -1, 10, 5]#Pos
-                    ],
-
-                    [#Motor 2
-                        [11, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-
-                    [#Motor 3
-                        [12, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-
-                    [#Motor 4
-                        [13, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-
-                    [#Motor 5
-                        [14, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-
-                    [#Motor 6
-                        [15, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-
-                    [#Motor 7
-                        [16, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ],
-
-                    [#Motor 8
-                        [17, 15, 20, 25, 30, 35, 40],
-                        [2, 3, 7, 3, -1, 10, 5]
-                    ]
-            ],
-
-            "Sensors": True}
+# lcdjson = {"PID": True,
+#             "Motors":
+#             [
+#                     [#Motor 1
+#                         [10, 15, 20, 25, 30, 35, 40],#Speed
+#                         [2, 3, 7, 3, -1, 10, 5]#Pos
+#                     ],
+#
+#                     [#Motor 2
+#                         [11, 15, 20, 25, 30, 35, 40],
+#                         [2, 3, 7, 3, -1, 10, 5]
+#                     ],
+#
+#                     [#Motor 3
+#                         [12, 15, 20, 25, 30, 35, 40],
+#                         [2, 3, 7, 3, -1, 10, 5]
+#                     ],
+#
+#                     [#Motor 4
+#                         [13, 15, 20, 25, 30, 35, 40],
+#                         [2, 3, 7, 3, -1, 10, 5]
+#                     ],
+#
+#                     [#Motor 5
+#                         [14, 15, 20, 25, 30, 35, 40],
+#                         [2, 3, 7, 3, -1, 10, 5]
+#                     ],
+#
+#                     [#Motor 6
+#                         [15, 15, 20, 25, 30, 35, 40],
+#                         [2, 3, 7, 3, -1, 10, 5]
+#                     ],
+#
+#                     [#Motor 7
+#                         [16, 15, 20, 25, 30, 35, 40],
+#                         [2, 3, 7, 3, -1, 10, 5]
+#                     ],
+#
+#                     [#Motor 8
+#                         [17, 15, 20, 25, 30, 35, 40],
+#                         [2, 3, 7, 3, -1, 10, 5]
+#                     ]
+#             ],
+#
+#             "Sensors":
+#                [
+#                    [  #Ultrasensors
+#                        [10, 15, 20, 25, 30, 35, 40],  #1
+#                        [2, 3, 7, 3, -1, 10, 5]  #2
+#                    ],
+#
+#                    [  #Potentiometers
+#                        [11, 15, 20, 25, 30, 35, 40],
+#                        [2, 3, 7, 3, -1, 10, 5]
+#                    ],
+#
+#                    [  #Gyros
+#                        [12, 15, 20, 25, 30, 35, 40],
+#                        [2, 3, 7, 3, -1, 10, 5]
+#                    ],
+#
+#                    [  # Line Sensors
+#                        [13, 15, 20, 25, 30, 35, 40],
+#                        [2, 3, 7, 3, -1, 10, 5]
+#                    ]
+#
+#                ]
+#            }
 
 #MotorList = []
 TimeLine = []
+TimeLine2 = []
 initTime = 0
+initTime2 = 0
 maxVelsize = 0
 """
 *****//If the team needed that the json files were written with dictionaries only//******
@@ -152,23 +177,59 @@ for files in lcdjson:
 #     #Sensors = (files['Sensors'])
 
 MotorList = lcdjson['Motors']
+SensorList = lcdjson['Sensors']
 for values in MotorList[0][0]:
     TimeLine.append(initTime)
     initTime += 0.02
+for values in SensorList[0][0]:
+    TimeLine2.append(initTime)
+    initTime2 += 0.02
 # plotting the points way 1
 fig = plt.figure()
 ax = fig.add_subplot(111, facecolor='#ffe8cc')
+# fig, (ax,ax2) = plt.subplots(2 )
+# ax.set_facecolor('#ffe8cc')
+# ax2.set_facecolor('#ffe8cc')
 fig.set_size_inches(18.5, 10.5, forward=True)
-# ax.set_ylim([8, 70])
+
+
 colors = ['yellow', 'red', 'green', 'blue', 'white', 'black', 'orange', 'cyan']
 for mtr in range(0, len(MotorList)):
-    plt.plot(TimeLine, MotorList[mtr][0], label='Motor ' + str(mtr + 1),  # Manera 2 [Motor][Speed]
+    ax.plot(TimeLine, MotorList[mtr][0], label='Motor ' + str(mtr + 1),  # Manera 2 [Motor][Speed]
              color=colors[mtr], linewidth=3, marker='o',
              markerfacecolor=colors[mtr], markersize=10)
 cursor = Cursor(ax, horizOn=True, vertOn=True, color='green', linewidth=2.0)
 
 # naming the x axis
 plt.xlabel('Time - axis')
+
+# naming the y axis
+plt.ylabel('Speed - axis')
+
+# giving a title to my graph
+plt.title('Time v Speed')
+plt.legend()
+
+for mtr in range(0, len(MotorList)):
+    x, y = DataCursor(ax, TimeLine, MotorList[mtr][0]).offsets
+    DataCursor(ax, TimeLine, MotorList[mtr][0])
+
+
+plt.rc('grid', linestyle="-", color='black')
+plt.grid(True)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, facecolor='#ffe8cc')
+fig.set_size_inches(18.5, 10.5, forward=True)
+for snsr in range(0, len(SensorList)):
+    ax.plot(TimeLine, SensorList[snsr][0], label='Ultrasensor ' + str(snsr+ 1),  # Manera 2 [Motor][Speed]
+             color=colors[snsr], linewidth=3, marker='o',
+             markerfacecolor = colors[snsr], markersize=10)
+
+cursor2 = Cursor(ax, horizOn=True, vertOn=True, color='green', linewidth=2.0)
+# naming the x axis
+plt.xlabel('Time - axis')
+
 # naming the y axis
 plt.ylabel('Speed - axis')
 
@@ -177,10 +238,11 @@ plt.title('Time v Speed')
 
 plt.legend()
 
-for mtr in range(0, len(MotorList)):
-    x, y = DataCursor(ax, TimeLine, MotorList[mtr][0]).offsets
-    DataCursor(ax, TimeLine, MotorList[mtr][0])
+for mtr in range(0, len(SensorList)):
+    x, y = DataCursor(ax, TimeLine, SensorList[mtr][0]).offsets
+    DataCursor(ax, TimeLine, SensorList[mtr][0])
 
 plt.rc('grid', linestyle="-", color='black')
 plt.grid(True)
+
 plt.show()

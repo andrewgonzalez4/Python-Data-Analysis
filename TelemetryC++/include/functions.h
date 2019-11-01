@@ -4,14 +4,21 @@
 #include <string>
 #include <iostream>
 #include <vector>
+
 using namespace okapi;
 using nlohmann::json;
+
 #define MAX_SPEED 100
 #define LEFT_WHEEL_DOWN 2
 #define RIGHT_WHEEL_DOWN 1
 #define LEFT_WHEEL_UP 5
-#define RIGHT_WHEEL_UP 9
+#define RIGHT_WHEEL_UP 2
 #define ROTATION_ARM 10
+
+#define ULTRA_PING_PORT 1
+#define ULTRA_ECHO_PORT 2
+#define ULTRA_PING_PORT2 7
+#define ULTRA_ECHO_PORT2 8
 //Author: andrew.gonzalez4 on gitlab and andrewgonzalez4 on github.
 
 pros::Motor left_wheels_down (LEFT_WHEEL_DOWN);
@@ -19,6 +26,12 @@ pros::Motor right_wheels_down (RIGHT_WHEEL_DOWN, true);//true means it goes reve
 pros::Motor left_wheels_up (LEFT_WHEEL_UP);
 pros::Motor right_wheels_up (RIGHT_WHEEL_UP, true);//true means it goes reversed.
 pros::Motor rotation_arm (ROTATION_ARM);
+pros::ADIUltrasonic ultrasonic (ULTRA_PING_PORT, ULTRA_ECHO_PORT);
+pros::ADIUltrasonic ultrasonic2 (ULTRA_PING_PORT, ULTRA_ECHO_PORT);
+
+inline okapi::AverageFilter<5> avgFilter;
+inline okapi::DemaFilter demaFilter(0.2, 0.05);
+
 
   void moveMotors(){
    right_wheels_down.move_voltage(12000);
@@ -35,13 +48,17 @@ pros::Motor rotation_arm (ROTATION_ARM);
  void convert(){
    std::string filename;
    std::vector<std::vector<std::vector<int>>> motors;
-   std::vector<std::vector<int>> organize;
-   std::vector<std::vector<int>> organize2;
-    std::vector<std::vector<int>> organize3;
+   std::vector<std::vector<std::vector<int>>> sensors;
+   std::vector<std::vector<int>> mtr_1;
+   std::vector<std::vector<int>> mtr_2;
+   std::vector<std::vector<int>> mtr_3;
+   std::vector<std::vector<int>> ultsonic;
+   std::vector<std::vector<int>> ultsonic2;
    std::vector<int> speeds;
    std::vector<int> speeds2;
    std::vector<int> speeds3;
-
+   std::vector<int> ult_1;
+   std::vector<int> ult_2;
 
   Timer timer;
   timer.placeMark();
@@ -49,25 +66,32 @@ pros::Motor rotation_arm (ROTATION_ARM);
   json i;
 
   while(timer.getDtFromMark() < 10000_ms){
-    moveMotors();
+    //moveMotors();
     speeds.push_back(right_wheels_down.get_actual_velocity());
     speeds2.push_back(right_wheels_up.get_actual_velocity());
     speeds3.push_back(rotation_arm.get_actual_velocity());
-    std::cout <<  right_wheels_down.get_actual_velocity() << "Motor right down";
-    std::cout <<  right_wheels_up.get_actual_velocity() << "Motor right up";
-    std::cout <<  rotation_arm.get_actual_velocity() << "Motor arm";
+    ult_1.push_back((int)demaFilter.filter(ultrasonic.get_value()));
+    //ult_2.push_back((int)demaFilter.filter(ultrasonic2.get_value()));
+    // std::cout <<  right_wheels_down.get_actual_velocity() << "Motor right down";
+    // std::cout <<  right_wheels_up.get_actual_velocity() << "Motor right up";
+    // std::cout <<  rotation_arm.get_actual_velocity() << "Motor arm";
     //std::printf("%f", right_wheels_down.get_actual_velocity());
     pros::delay(30);
   }
   stopMotors();
 
-  organize.push_back(speeds);
-  organize2.push_back(speeds2);
-  organize3.push_back(speeds3);
-  motors.push_back(organize);
-  motors.push_back(organize2);
-  motors.push_back(organize3);
+  mtr_1.push_back(speeds);
+  mtr_2.push_back(speeds2);
+  mtr_3.push_back(speeds3);
+  ultsonic.push_back(ult_1);
+  //ultsonic2.push_back(ult_2);
+  motors.push_back(mtr_1);
+  motors.push_back(mtr_2);
+  motors.push_back(mtr_3);
+  sensors.push_back(ultsonic);
+  //sensors.push_back(ultsonic2);
   j["Motors"] = motors;
+  j["Sensors"] = sensors;
 
   std::vector<std::string> toSD;
 
