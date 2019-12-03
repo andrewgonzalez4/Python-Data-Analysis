@@ -19,10 +19,13 @@ void on_center_button() {
 
 void initialize() {
 
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Initialize");
-	convert();
+	 pros::lcd::initialize();
+	 pros::lcd::set_text(1, "Initialize");
+	// convert();
 	//SonicAdjustment(2500);
+	//LargestColorAcquisition();
+	testcode();
+	//vision().colorCheck("Purple");
 
 
 }
