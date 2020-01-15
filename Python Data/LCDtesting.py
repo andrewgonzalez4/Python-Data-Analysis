@@ -80,77 +80,77 @@ class DataCursor(object):
             annotation.set_visible(True)
             event.canvas.draw()
 
+#
+# with open('j.json', 'r') as f:
+#     lcdjson = json.load(f)
+lcdjson = {"PID": True,
+            "Motors":
+            [
+                    [#Motor 1
+                        [10, 15, 20, 25, 30, 35, 40],#Speed
+                        [2, 3, 7, 3, -1, 10, 5]#Pos
+                    ],
 
-with open('j.json', 'r') as f:
-    lcdjson = json.load(f)
-# lcdjson = {"PID": True,
-#             "Motors":
-#             [
-#                     [#Motor 1
-#                         [10, 15, 20, 25, 30, 35, 40],#Speed
-#                         [2, 3, 7, 3, -1, 10, 5]#Pos
-#                     ],
-#
-#                     [#Motor 2
-#                         [11, 15, 20, 25, 30, 35, 40],
-#                         [2, 3, 7, 3, -1, 10, 5]
-#                     ],
-#
-#                     [#Motor 3
-#                         [12, 15, 20, 25, 30, 35, 40],
-#                         [2, 3, 7, 3, -1, 10, 5]
-#                     ],
-#
-#                     [#Motor 4
-#                         [13, 15, 20, 25, 30, 35, 40],
-#                         [2, 3, 7, 3, -1, 10, 5]
-#                     ],
-#
-#                     [#Motor 5
-#                         [14, 15, 20, 25, 30, 35, 40],
-#                         [2, 3, 7, 3, -1, 10, 5]
-#                     ],
-#
-#                     [#Motor 6
-#                         [15, 15, 20, 25, 30, 35, 40],
-#                         [2, 3, 7, 3, -1, 10, 5]
-#                     ],
-#
-#                     [#Motor 7
-#                         [16, 15, 20, 25, 30, 35, 40],
-#                         [2, 3, 7, 3, -1, 10, 5]
-#                     ],
-#
-#                     [#Motor 8
-#                         [17, 15, 20, 25, 30, 35, 40],
-#                         [2, 3, 7, 3, -1, 10, 5]
-#                     ]
-#             ],
-#
-#             "Sensors":
-#                [
-#                    [  #Ultrasensors
-#                        [10, 15, 20, 25, 30, 35, 40],  #1
-#                        [2, 3, 7, 3, -1, 10, 5]  #2
-#                    ],
-#
-#                    [  #Potentiometers
-#                        [11, 15, 20, 25, 30, 35, 40],
-#                        [2, 3, 7, 3, -1, 10, 5]
-#                    ],
-#
-#                    [  #Gyros
-#                        [12, 15, 20, 25, 30, 35, 40],
-#                        [2, 3, 7, 3, -1, 10, 5]
-#                    ],
-#
-#                    [  # Line Sensors
-#                        [13, 15, 20, 25, 30, 35, 40],
-#                        [2, 3, 7, 3, -1, 10, 5]
-#                    ]
-#
-#                ]
-#            }
+                    [#Motor 2
+                        [11, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [#Motor 3
+                        [12, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [#Motor 4
+                        [13, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [#Motor 5
+                        [14, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [#Motor 6
+                        [15, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [#Motor 7
+                        [16, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ],
+
+                    [#Motor 8
+                        [17, 15, 20, 25, 30, 35, 40],
+                        [2, 3, 7, 3, -1, 10, 5]
+                    ]
+            ],
+
+            "Sensors":
+               [
+                   [  #Ultrasensors
+                       [10, 15, 20, 25, 30, 35, 40],  #1
+                       [2, 3, 7, 3, -1, 10, 5]  #2
+                   ],
+
+                   [  #Potentiometers
+                       [11, 15, 20, 25, 30, 35, 40],
+                       [2, 3, 7, 3, -1, 10, 5]
+                   ],
+
+                   [  #Gyros
+                       [12, 15, 20, 25, 30, 35, 40],
+                       [2, 3, 7, 3, -1, 10, 5]
+                   ],
+
+                   [  # Line Sensors
+                       [13, 15, 20, 25, 30, 35, 40],
+                       [2, 3, 7, 3, -1, 10, 5]
+                   ]
+
+               ]
+           }
 
 #MotorList = []
 TimeLine = []
@@ -238,9 +238,9 @@ plt.title('Time v Speed')
 
 plt.legend()
 
-for mtr in range(0, len(SensorList)):
-    x, y = DataCursor(ax, TimeLine, SensorList[mtr][0]).offsets
-    DataCursor(ax, TimeLine, SensorList[mtr][0])
+for sns in range(0, len(SensorList)):
+    x, y = DataCursor(ax, TimeLine, SensorList[sns][0]).offsets
+    DataCursor(ax, TimeLine, SensorList[sns][0])
 
 plt.rc('grid', linestyle="-", color='black')
 plt.grid(True)

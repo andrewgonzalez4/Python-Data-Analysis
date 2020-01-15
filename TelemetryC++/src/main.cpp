@@ -21,11 +21,7 @@ void initialize() {
 
 	 pros::lcd::initialize();
 	 pros::lcd::set_text(1, "Initialize");
-	// convert();
-	//SonicAdjustment(2500);
-	//LargestColorAcquisition();
-	testcode();
-	//vision().colorCheck("Purple");
+
 
 
 }

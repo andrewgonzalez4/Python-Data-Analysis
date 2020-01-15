@@ -1,5 +1,6 @@
 #include "main.h"
 #include "json.hpp"
+#include "odometry.hpp"
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -39,6 +40,14 @@ pros::Vision vision_sensor (VISION_PORT);
 inline okapi::AverageFilter<5> avgFilter;
 inline okapi::DemaFilter demaFilter(0.2, 0.05);
 
+struct motorData{
+
+  std::vector<int> speeds;
+  std::vector<int> x;
+  std::vector<int> y;
+  std::vector<int> theta;
+
+}mtr1,mtr2,mtr3;
 
 void moveMotors(){
    left_wheels_up.move_voltage(12000);
@@ -67,9 +76,25 @@ void moveMotors(){
    std::vector<std::vector<int>> ultsonic;
    std::vector<std::vector<int>> ultsonic2;
    //Unique Values
+   //MTR_1
    std::vector<int> speeds;
+   std::vector<std::vector<float>> pos_1;
+   std::vector<float> x_1;
+   std::vector<float> y_1;
+   std::vector<float> theta_1;
+   //MTR_2
    std::vector<int> speeds2;
+   std::vector<int> pos_2;
+   std::vector<float> x_2;
+   std::vector<float> y_2;
+   std::vector<float> theta_2;
+   //MTR_3
    std::vector<int> speeds3;
+   std::vector<int> pos_3;
+   std::vector<float> x_3;
+   std::vector<float> y_3;
+   std::vector<float> theta_3;
+   //ULT_SONIC
    std::vector<int> ult_1;
    std::vector<int> ult_2;
 
@@ -93,9 +118,22 @@ void moveMotors(){
     pros::delay(30);
   }
   stopMotors();
+
   //Pushing Individual Values
+  //Motor 1
+  pos_1.push_back(x_1);
+  pos_1.push_back(y_1);
+  pos_1.push_back(theta_1);
   mtr_1.push_back(speeds);
+  mtr_1.push_back(pos_1);
+  //Motor 2
+  pos_2.push_back(x_2);
+  pos_2.push_back(y_2);
+  pos_2.push_back(theta_2);
+  mtr_2.push_back(pos_2);
   mtr_2.push_back(speeds2);
+
+
   mtr_3.push_back(speeds3);
   ultsonic.push_back(ult_1);
   ultsonic2.push_back(ult_2);
@@ -105,6 +143,7 @@ void moveMotors(){
   motors.push_back(mtr_3);
   sensors.push_back(ultsonic);
   sensors.push_back(ultsonic2);
+
   //Creating dicitionaries
   j["Motors"] = motors;
   j["Sensors"] = sensors;
@@ -134,6 +173,7 @@ fclose(usd_file_write);//close the file
 
 }
 
+//ULTRASONIC
 void SonicAdjustment(int voltage){
   Timer timer;
   timer.placeMark();
@@ -166,6 +206,7 @@ void SonicAdjustment(int voltage){
   //}
 }
 
+//VISION SENSOR
 void LargestColorAcquisition(){
   std::string outt = "";
   //vision_sensor.set_zero_point(VISION_ZERO_CENTER);
@@ -225,7 +266,6 @@ void testcode(){
 		pros::delay(20);
 	}
 }
-
 void LargestColorAcquisition2(){
    std::string outt = "";
    pros::vision_object_s_t object_arr[NUM_VISION_OBJECTS];
@@ -245,7 +285,6 @@ void LargestColorAcquisition2(){
     pros::delay(2);
   }
 }
-
 class visionSensor
 {
   public:
