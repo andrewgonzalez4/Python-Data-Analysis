@@ -43,9 +43,9 @@ inline okapi::DemaFilter demaFilter(0.2, 0.05);
 struct motorData{
 
   std::vector<int> speeds;
-  std::vector<int> x;
-  std::vector<int> y;
-  std::vector<int> theta;
+  std::vector<float> x;
+  std::vector<float> y;
+  std::vector<float> theta;
 
 }mtr1,mtr2,mtr3;
 
@@ -63,115 +63,6 @@ void moveMotors(){
    right_wheels_up.move_voltage(0);
    rotation_arm.move_voltage(0);
  }
-
- void convert(){
-   std::string filename;
-   //Dictionaries
-   std::vector<std::vector<std::vector<int>>> motors;
-   std::vector<std::vector<std::vector<int>>> sensors;
-   //Individual Components
-   std::vector<std::vector<int>> mtr_1;
-   std::vector<std::vector<int>> mtr_2;
-   std::vector<std::vector<int>> mtr_3;
-   std::vector<std::vector<int>> ultsonic;
-   std::vector<std::vector<int>> ultsonic2;
-   //Unique Values
-   //MTR_1
-   std::vector<int> speeds;
-   std::vector<std::vector<float>> pos_1;
-   std::vector<float> x_1;
-   std::vector<float> y_1;
-   std::vector<float> theta_1;
-   //MTR_2
-   std::vector<int> speeds2;
-   std::vector<int> pos_2;
-   std::vector<float> x_2;
-   std::vector<float> y_2;
-   std::vector<float> theta_2;
-   //MTR_3
-   std::vector<int> speeds3;
-   std::vector<int> pos_3;
-   std::vector<float> x_3;
-   std::vector<float> y_3;
-   std::vector<float> theta_3;
-   //ULT_SONIC
-   std::vector<int> ult_1;
-   std::vector<int> ult_2;
-
-  Timer timer;
-  timer.placeMark();
-  json j;
-  json i;
-
-  while(timer.getDtFromMark() < 10000_ms){
-    //moveMotors();
-
-    speeds.push_back(left_wheels_up.get_actual_velocity());
-    speeds2.push_back(right_wheels_up.get_actual_velocity());
-    speeds3.push_back(rotation_arm.get_actual_velocity());
-    ult_1.push_back((int)demaFilter.filter(ultrasonic.get_value()));
-    ult_2.push_back((int)demaFilter.filter(ultrasonic2.get_value()));
-    // std::cout <<  right_wheels_down.get_actual_velocity() << "Motor right down";
-    // std::cout <<  right_wheels_up.get_actual_velocity() << "Motor right up";
-    // std::cout <<  rotation_arm.get_actual_velocity() << "Motor arm";
-    //std::printf("%f", right_wheels_down.get_actual_velocity());
-    pros::delay(30);
-  }
-  stopMotors();
-
-  //Pushing Individual Values
-  //Motor 1
-  pos_1.push_back(x_1);
-  pos_1.push_back(y_1);
-  pos_1.push_back(theta_1);
-  mtr_1.push_back(speeds);
-  mtr_1.push_back(pos_1);
-  //Motor 2
-  pos_2.push_back(x_2);
-  pos_2.push_back(y_2);
-  pos_2.push_back(theta_2);
-  mtr_2.push_back(pos_2);
-  mtr_2.push_back(speeds2);
-
-
-  mtr_3.push_back(speeds3);
-  ultsonic.push_back(ult_1);
-  ultsonic2.push_back(ult_2);
-  //Pushing Individual Components
-  motors.push_back(mtr_1);
-  motors.push_back(mtr_2);
-  motors.push_back(mtr_3);
-  sensors.push_back(ultsonic);
-  sensors.push_back(ultsonic2);
-
-  //Creating dicitionaries
-  j["Motors"] = motors;
-  j["Sensors"] = sensors;
-
-  std::vector<std::string> toSD;
-
-  filename = "j.json";
-
-  std::string wri = j.dump();
-
-  toSD.push_back(wri);
-
-
-  char cstr[wri.size() +1];
-  strcpy(cstr, wri.c_str());
-
-  std::ofstream out(filename);
-  out << j.dump();
-  out.close();
-
-FILE* usd_file_write = fopen("/usd/j.json", "w");//open file
-fputs(cstr, usd_file_write);//write in the file
-fclose(usd_file_write);//close the file
-
-//Gotten from https://pros.cs.purdue.edu/v5/tutorials/topical/filesystem.html
-//and https://www.techiedelight.com/convert-string-char-array-cpp/
-
-}
 
 //ULTRASONIC
 void SonicAdjustment(int voltage){

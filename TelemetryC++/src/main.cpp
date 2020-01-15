@@ -1,5 +1,5 @@
 #include "main.h"
-#include "functions.h"
+#include "dataAcquisition.hpp"
 #include <vector>
 using namespace okapi;
 #include "json.hpp"
